@@ -1,0 +1,12 @@
+:443
+{
+    root * /var/www/html
+    tls lewis.aedes@gmail.com
+
+    php_fastcgi gvm_php:9000 {
+        split .php
+        index index.php
+    }
+
+    file_server
+}

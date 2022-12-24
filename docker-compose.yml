@@ -1,0 +1,23 @@
+version: '3'
+services:
+    caddy:
+        container_name: gvm_caddy
+        image: caddy:2.6.2
+        ports:
+            - "443:443"
+            - "443:443/udp"
+        volumes:
+            - "./public:/var/www/html"   
+            - "./caddy/Caddyfile:/etc/caddy/Caddyfile"
+            - "./caddy/data:/data"
+            - "./caddy/config:/config"
+        links:
+            - php
+        depends_on:
+            - php
+
+    php:
+        container_name: gvm_php
+        image: php:7.0-fpm
+        volumes:
+            - "./public:/var/www/html"
